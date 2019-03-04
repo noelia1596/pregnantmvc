@@ -1,6 +1,7 @@
 const Usuario = require('../models/usuarios').clase;
 const Antojo = require('../models/antojos');
 const recogerUsuario = require('./usuarioController');
+const Token = require('../auth/Token');
 
 
 
@@ -18,7 +19,7 @@ const recogerUsuario = require('./usuarioController');
     Usuario
       .modificarUsuario( password, Nombre, Apellidos,FechaNacimientoMama,FechaEmbarazo,NombrePadre,FechaNacimientoPadre,ApellidosPadre,usuarioId)
       .then(() => {
-        res.redirect('/principal');
+        res.render('principal');
       })
       .catch(err => console.log(err));
   };
@@ -30,7 +31,7 @@ const recogerUsuario = require('./usuarioController');
   };
 
   exports.postCrearUsuario = (req, res, next) => {
-    const username = un;
+    const username = req.body.usuario;
     const password = req.body.password;
     const Nombre = req.body.Nombre;
     const Apellidos = req.body.Apellidos;
@@ -44,7 +45,7 @@ const recogerUsuario = require('./usuarioController');
     usuario
       .crearUsuario()
       .then(() => {
-        res.redirect('/principal');
+        res.render('principal');
       })
       .catch(err => console.log(err));
   };
@@ -59,15 +60,20 @@ const recogerUsuario = require('./usuarioController');
     antojo
       .crearAntojo()
       .then(() => {
-        res.render('principal');
+        res.render('principal',{
+          token: Token.buildToken(userId)
+        });
+        
       })
       .catch(err => console.log(err));
   };
 
 
   exports.getInsertarAntojo = (req, res, next) => {
+    userId = req.userId;//coge el usuario que se ha insertado
     res.render('insertarAntojo', {
       pageTitle: 'Insertar Antojo',
+      token: Token.buildToken(userId) //al usuario le pasamos el token
     });
   };
 
@@ -97,10 +103,12 @@ const recogerUsuario = require('./usuarioController');
   };
 
   exports.postBorrarUsuario = (req, res, next) => {
-    const usuId = req.params.id;
-    Restaurant.borrarUsuarioId(usuId)
+    const usuId = req.params.usuario;
+    Usuario.borrarUsuarioId(usuId)
     .then(() => {
-        res.redirect('/');
+        res.redirect('/',{
+        token: Token.buildToken(userId)
+        });
     })
     .catch(err => console.log(err));
   };
@@ -117,6 +125,8 @@ const recogerUsuario = require('./usuarioController');
   exports.irPrincipal = (req, res, next) => {
     res.render('principal', {
       pageTitle: 'Pagina Principal',
+      
+//redencizamos para que se vaya
     });
   };
 

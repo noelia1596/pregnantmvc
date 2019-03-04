@@ -23,7 +23,6 @@ model.findByUsername(un)
             if(cryptPasswd !== dbPwd){
                 res.redirect('/');
             }else{
-                //model.instancia = findByUsername;
                 console.log(customer);
                 model.instancia = new Usuario(customer.usuario, customer.password,customer.Nombre,customer.Apellidos, customer.FechaNacimientoMama, customer.FechaEmbarazo, customer.NombrePadre, customer.FechaNacimientoPadre, customer.ApellidosPadre)
                 console.log(model.instancia);
@@ -32,7 +31,7 @@ model.findByUsername(un)
                     'username' : un,
                     'fullname' : customer.fullname,
                     //ponemos que se vaya al token y haga ese funcion que esta declarada, y le pasamos la key(customer.id, porque es unica, por eso)
-                    'token' : Token.buildToken(customer.id)
+                    token: Token.buildToken(customer.usuario)
                     
                 });
             }   

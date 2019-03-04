@@ -3,16 +3,17 @@
 
 </head>
 <%- include('./includes/head.ejs') %>
-<body>
-
+<body> 
     <div class="container-fluid" id="divAntojos">
-        <form action="/insertarAntojo" method="POST">
+        <form action="/insertarAntojo/<%=token %>" method="POST">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Nombre Del Antojo</label>
                     <input type="text" class="form-control" name="NombreAntojo" placeholder="Di exactamente cual fue el antojo" required>
                 </div>
-                
+                <div>
+                    <input type="hidden" value="<%=token %>" />
+                </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">

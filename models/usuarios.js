@@ -1,5 +1,7 @@
 const db = require('../util/database');
 const crypt = require('../util/crypt-util');
+const Token = require ('../auth/Token');
+//const usuarioController = require ('../controllers/usuarioController')
 
 var instancia;
 const clase = class Usuario{
@@ -25,20 +27,21 @@ const clase = class Usuario{
         );
     }
 
-    static modificarUsuario(password,nombre,apellidos,fechaNacimientoMama,fechaEmbarazo,nombrePadre,fechaNacimientoPadre,apellidosPadre,usuarioId){
+    static modificarUsuario(password,nombre,apellidos,fechaNacimientoMama,fechaEmbarazo,nombrePadre,fechaNacimientoPadre,apellidosPadre,usuario){
         const cryptPasswd = crypt.encrypt(password);
         return db.execute(
-            'UPDATE pregnant.usuarios SET password = ?, nombre = ?, apellidos= ?, fechaNacimientoMama = ? , fechaEmbarazo = ?, nombrePadre = ?, fechaNacimientoPadre = ?, apellidosPadre = ? WHERE usuario = ?', 
-            [cryptPasswd,nombre,apellidos,fechaNacimientoMama,fechaEmbarazo,nombrePadre,fechaNacimientoPadre,apellidosPadre,usuarioId] 
+            "UPDATE pregnant.usuarios SET password = ?, nombre = ?, apellidos= ?, fechaNacimientoMama = ? , fechaEmbarazo = ?, nombrePadre = ?, fechaNacimientoPadre = ?, apellidosPadre = ? WHERE usuario = '" + un + "'", 
+            [cryptPasswd,nombre,apellidos,fechaNacimientoMama,fechaEmbarazo,nombrePadre,fechaNacimientoPadre,apellidosPadre,usuario] 
         ) 
     }
 
     static borrarUsuarioId(id){
-        return db.execute('DELETE FROM pregnant.usuarios WHERE usuario = ?', [id]);
+        userId = req.userId;
+        return db.execute('DELETE FROM pregnant.usuarios WHERE usuario = ?', [userId]);
     }
 
     static selectById(id) {
-        return db.execute('SELECT * FROM pregnant.usuarios WHERE usuario= ?', [id]);
+        return db.execute('SELECT * FROM pregnant.usuarios WHERE usuario= ?', [userId]);
       }
 }
 

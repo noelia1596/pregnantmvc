@@ -7,7 +7,6 @@ const usuarioM = require('../models/usuarios');
 module.exports = class Antojo{
     constructor(tipoDeAntojo, nombreDelAntojo, fechaDelAntojo, vecesDadasDelAntojo, aQuienLeDio){
         const usuariooo = usuarioM.instancia;
-        console.log(usuariooo);
         this.usuario = usuariooo.username;
         this.tipoDeAntojo = tipoDeAntojo;
         this.nombreDelAntojo = nombreDelAntojo;
@@ -20,7 +19,7 @@ module.exports = class Antojo{
         
         console.log(this.usuario,this.tipoDeAntojo, this.nombreDelAntojo, this.fechaDelAntojo, this.vecesDadasDelAntojo,this.aQuienLeDio);
         return db.execute(
-            'INSERT INTO pregnant.antojos (usuario,tipoDeAntojo,nombreDelAntojo,fechaDelAntojo,vecesDadasDelAntojo,aQuienLeDio)VALUE(?, ?, ?, ?, ?,?)',
+            'INSERT INTO pregnant.antojos (usuario,tipoDeAntojo,nombreDelAntojo,fechaDelAntojo,vecesDadasDelAntojo,aQuienLeDio)VALUE(?, ?, ?, ?, ?, ?)',
             [this.usuario,this.tipoDeAntojo, this.nombreDelAntojo, this.fechaDelAntojo,this.vecesDadasDelAntojo,this.aQuienLeDio]
         );
     }

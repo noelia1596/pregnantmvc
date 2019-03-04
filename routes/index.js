@@ -8,6 +8,8 @@ const indexController = require('../controllers/index');
 
 const usuarioController = require('../controllers/usuarioController');
 
+const Token = require('../auth/Token');
+
 // --- Añadimos controladores --- //
 
 router.get('/',indexController.login);
@@ -28,13 +30,13 @@ router.get('/comunicarEmbarazo', indexController.comunicarEmbarazo);
 
 router.get('/verAlimentos', indexController.verAlimentos);
 
-router.get('/insertarAntojo', indexController.getInsertarAntojo);
+router.get('/insertarAntojo/:token/',Token.verifyParam, indexController.getInsertarAntojo);
 
-router.post('/insertarAntojo', indexController.postInsertarAntojo);
+router.post('/insertarAntojo/:token/', Token.verifyParam, indexController.postInsertarAntojo);
 
 router.get('/irPrincipal', indexController.irPrincipal);
 
-router.post('/usuario/:id/borrar', indexController.postBorrarUsuario);
+router.post('/borrarUsuario/:token/', Token.verifyParam, indexController.postBorrarUsuario);
 
 
 
