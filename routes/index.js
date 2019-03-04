@@ -16,27 +16,29 @@ router.get('/',indexController.login);
 
 router.post('/',usuarioController.doLogin);
 
-router.get('/editarUsuario',indexController.getModificarUsuario);
+router.get('/editarUsuario/:token/',Token.verifyParam,indexController.getModificarUsuario);
 
-router.post('/editarUsuario',indexController.postModificarUsuario);
+router.post('/editarUsuario/:token/',Token.verifyParam,indexController.postModificarUsuario);
 
 router.get('/registrarse', indexController.crearUsuario);
 
 router.post('/registrarse', indexController.postCrearUsuario);
 
-router.get('/verMedicamentos', indexController.verMedicamentos);
+router.get('/verMedicamentos/:token/',Token.verifyParam, indexController.verMedicamentos);
 
-router.get('/comunicarEmbarazo', indexController.comunicarEmbarazo);
+router.get('/comunicarEmbarazo/:token/',Token.verifyParam,indexController.comunicarEmbarazo);
 
-router.get('/verAlimentos', indexController.verAlimentos);
+router.get('/verAlimentos/:token/', indexController.verAlimentos);
 
 router.get('/insertarAntojo/:token/',Token.verifyParam, indexController.getInsertarAntojo);
 
 router.post('/insertarAntojo/:token/', Token.verifyParam, indexController.postInsertarAntojo);
 
+router.get('/verAntojos/:token/',Token.verifyParam, indexController.getVerAntojos);
+
 router.get('/irPrincipal', indexController.irPrincipal);
 
-router.post('/borrarUsuario/:token/', Token.verifyParam, indexController.postBorrarUsuario);
+
 
 
 

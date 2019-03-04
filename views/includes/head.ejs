@@ -31,7 +31,7 @@
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  <li><a href="/verAlimentos" id="alimentacion">Alimentacion</a></li>
+                  <li><a href="/verAlimentos/<%=token%>" id="alimentacion">Alimentacion</a></li>
                   <li><a href="#" id="baile">Baile</a></li>
                   <li><a href="#" id="cambiosCuerpo">Cambios en tu cuerpo</a></li>
                   <li class="nav-item dropdown">
@@ -39,13 +39,13 @@
                       Antojos
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#" id="verAntojo">Ver Antojos</a>
+                      <a class="dropdown-item" href="/verAntojos/<%=token%>" id="verAntojo">Ver Antojos</a>
                     </br>
                       <a class="dropdown-item" href="/insertarAntojo/<%=token%>" id="insertarAntojo">Insertar Antojos</a>
                     </div>
                   </li>
-                  <li><a href="/comunicarEmbarazo" id="comunicar">Comunicar embarazo en el trabajo</a></li>
-                  <li><a href="/verMedicamentos" id="medicamentos">¿Medicamentos?</a></li>
+                  <li><a href="/comunicarEmbarazo/<%=token%>" id="comunicar">Comunicar embarazo en el trabajo</a></li>
+                  <li><a href="/verMedicamentos/<%=token%>" id="medicamentos">¿Medicamentos?</a></li>
                   <li><a href="#" id="evolucion">Evolucionamiento del bebe</a></li>
                                 
                 </ul>

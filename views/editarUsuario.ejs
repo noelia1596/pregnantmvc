@@ -5,7 +5,10 @@
 <%- include('./includes/head.ejs') %>
 <body>
   
-    <form action="/editarUsuario" method="POST">
+    <form action="/editarUsuario/<%=token %>" method="POST">
+        <div>
+            <input type="hidden" value="<%=token %>" />
+        </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputPassword">Password</label>

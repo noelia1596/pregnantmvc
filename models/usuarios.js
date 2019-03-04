@@ -30,11 +30,12 @@ const clase = class Usuario{
     static modificarUsuario(password,nombre,apellidos,fechaNacimientoMama,fechaEmbarazo,nombrePadre,fechaNacimientoPadre,apellidosPadre,usuario){
         const cryptPasswd = crypt.encrypt(password);
         return db.execute(
-            "UPDATE pregnant.usuarios SET password = ?, nombre = ?, apellidos= ?, fechaNacimientoMama = ? , fechaEmbarazo = ?, nombrePadre = ?, fechaNacimientoPadre = ?, apellidosPadre = ? WHERE usuario = '" + un + "'", 
+            "UPDATE pregnant.usuarios SET password = ?, nombre = ?, apellidos= ?, fechaNacimientoMama = ? , fechaEmbarazo = ?, nombrePadre = ?, fechaNacimientoPadre = ?, apellidosPadre = ? WHERE usuario = ?", 
             [cryptPasswd,nombre,apellidos,fechaNacimientoMama,fechaEmbarazo,nombrePadre,fechaNacimientoPadre,apellidosPadre,usuario] 
         ) 
     }
 
+    /*
     static borrarUsuarioId(id){
         userId = req.userId;
         return db.execute('DELETE FROM pregnant.usuarios WHERE usuario = ?', [userId]);
@@ -43,6 +44,8 @@ const clase = class Usuario{
     static selectById(id) {
         return db.execute('SELECT * FROM pregnant.usuarios WHERE usuario= ?', [userId]);
       }
+
+      */
 }
 
 const TABLE = "pregnant.usuarios"

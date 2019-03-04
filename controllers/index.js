@@ -6,7 +6,9 @@ const Token = require('../auth/Token');
 
 
   exports.postModificarUsuario = (req, res, next) => {
-    const usuarioId = req.body.usuario;
+    userId = req.userId;
+    console.log(userId);
+    const usuarioId = userId;
     const password = req.body.password;
     const Nombre = req.body.Nombre;
     const Apellidos = req.body.Apellidos;
@@ -19,13 +21,18 @@ const Token = require('../auth/Token');
     Usuario
       .modificarUsuario( password, Nombre, Apellidos,FechaNacimientoMama,FechaEmbarazo,NombrePadre,FechaNacimientoPadre,ApellidosPadre,usuarioId)
       .then(() => {
-        res.render('principal');
+        res.render('principal',{
+          token: Token.buildToken(userId)
+        });
+        
       })
       .catch(err => console.log(err));
   };
 
   exports.getModificarUsuario = (req, res, next) => {
+    userId = req.userId;
     res.render('editarUsuario', {
+      token: Token.buildToken(userId),
       pageTitle: 'Editar Usuario',
     });
   };
@@ -77,21 +84,44 @@ const Token = require('../auth/Token');
     });
   };
 
+  exports.getVerAntojos = (req, res, next) => {
+    userId = req.userId;//coge el usuario que se ha insertado
+    Antojo.ImprimirAntojo(userId)
+    .then((rows) => {
+      let antojos = rows[0];
+      console.log("rowsssssssssss",antojos);
+      res.render('VerAntojos', {
+        pageTitle: 'Insertar Antojo',
+        token: Token.buildToken(userId), //al usuario le pasamos el token
+        antojos:antojos
+      })
+      
+    })
+    .catch(err => console.log(err));
+    
+  };
+
   exports.verMedicamentos = (req, res, next) => {
+    userId = req.userId;
     res.render('medicamentos', {
       pageTitle: 'Medicamentos',
+      token: Token.buildToken(userId)
     });
   };
 
   exports.comunicarEmbarazo = (req, res, next) => {
+    userId = req.userId;
     res.render('comunicarEmbarazo', {
       pageTitle: 'Comunicar Embarazo',
+      token: Token.buildToken(userId)
     });
   };
 
   exports.verAlimentos = (req, res, next) => {
+    userId = req.userId;
     res.render('alimentos', {
       pageTitle: 'Alimentos',
+      token: Token.buildToken(userId)
     });
   };
 
@@ -102,9 +132,11 @@ const Token = require('../auth/Token');
     });
   };
 
+
+  /*
   exports.postBorrarUsuario = (req, res, next) => {
-    const usuId = req.params.usuario;
-    Usuario.borrarUsuarioId(usuId)
+    userId = req.userId;
+    Usuario.borrarUsuarioId(userId)
     .then(() => {
         res.redirect('/',{
         token: Token.buildToken(userId)
@@ -112,7 +144,7 @@ const Token = require('../auth/Token');
     })
     .catch(err => console.log(err));
   };
-
+*/
   
   exports.crearUsuario = (req, res, next) => {
     res.render('form', {
@@ -123,9 +155,10 @@ const Token = require('../auth/Token');
 
 
   exports.irPrincipal = (req, res, next) => {
+    userId = req.userId;
     res.render('principal', {
       pageTitle: 'Pagina Principal',
-      
+      token: Token.buildToken(userId)
 //redencizamos para que se vaya
     });
   };

@@ -41,5 +41,16 @@ module.exports = class Antojo{
         return db.execute('DELETE FROM pregnant.antojos WHERE usuario = ?', [id]);
     }
 
+    static dateToString(date){
+        let strDate = "";
+        let seconds = date.getSeconds();
+        let minutes = date.getMinutes();
+        let hour = date.getHours();
+        let day = date.getDay();
+        let month = date.getMonth() + 1; 
+        let year = date.getFullYear();
     
+        strDate = hour+":"+minutes+":"+seconds+" "+day+"/"+month+"/"+year;
+        return strDate;
+    }
 }
