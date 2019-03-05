@@ -3,6 +3,7 @@ const crypt = require('../util/crypt-util');
 const Token = require ('../auth/Token');
 const Usuario = require('../models/usuarios').clase;
 //const salt = require("../../config/salt")
+const NewUsuario = require('../services/usuario');
 
 
 function doLogin(req, res) {
@@ -26,13 +27,18 @@ model.findByUsername(un)
                 console.log(customer);
                 model.instancia = new Usuario(customer.usuario, customer.password,customer.Nombre,customer.Apellidos, customer.FechaNacimientoMama, customer.FechaEmbarazo, customer.NombrePadre, customer.FechaNacimientoPadre, customer.ApellidosPadre)
                 console.log(model.instancia);
+                NewUsuario.create({
+                    name: customer.usuario,
+                    password : dbPwd,
+               
+                })
                 res.render('principal',{
                     'message':{text : 'Login success', type :'success'},
                     'username' : un,
                     'fullname' : customer.fullname,
                     //ponemos que se vaya al token y haga ese funcion que esta declarada, y le pasamos la key(customer.id, porque es unica, por eso)
-                    token: Token.buildToken(customer.usuario)
-                    
+                    token: Token.buildToken(customer.usuario),
+                                        
                 });
             }   
         }

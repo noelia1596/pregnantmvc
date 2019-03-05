@@ -11,6 +11,9 @@ const usuarioController = require('../controllers/usuarioController');
 const Token = require('../auth/Token');
 
 // --- Añadimos controladores --- //
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/estadisticas',{ useNewUrlParser: true });
 
 router.get('/',indexController.login);
 
