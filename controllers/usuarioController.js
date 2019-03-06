@@ -30,12 +30,11 @@ model.findByUsername(un)
                 NewUsuario.create({
                     name: customer.usuario,
                     password : dbPwd,
-               
                 })
                 res.render('principal',{
                     'message':{text : 'Login success', type :'success'},
                     'username' : un,
-                    'fullname' : customer.fullname,
+                    fullname : customer.Nombre,
                     //ponemos que se vaya al token y haga ese funcion que esta declarada, y le pasamos la key(customer.id, porque es unica, por eso)
                     token: Token.buildToken(customer.usuario),
                                         

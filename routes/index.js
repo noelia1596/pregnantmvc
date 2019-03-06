@@ -8,6 +8,8 @@ const indexController = require('../controllers/index');
 
 const usuarioController = require('../controllers/usuarioController');
 
+const usuarioControl = require('../controllers/usuario');
+
 const Token = require('../auth/Token');
 
 // --- Añadimos controladores --- //
@@ -40,6 +42,8 @@ router.post('/insertarAntojo/:token/', Token.verifyParam, indexController.postIn
 router.get('/verAntojos/:token/',Token.verifyParam, indexController.getVerAntojos);
 
 router.get('/irPrincipal', indexController.irPrincipal);
+
+router.get('/verEstadisticas/:token/',Token.verifyParam, usuarioControl.findAll);
 
 
 

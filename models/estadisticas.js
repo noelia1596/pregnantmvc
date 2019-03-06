@@ -22,6 +22,7 @@ UsuarioSchema.pre('save', function(next) {
   this.enabled = true;
   next(); // Continue saving process. Otherwise it will hang
 })
+
 const model = mongoose.model(MODEL_NAME, UsuarioSchema);//el esquema que he guardado me lo guardas con la clave, que es usuario(model_name)
 function toJSON(obj) {
   return  {
@@ -29,6 +30,8 @@ function toJSON(obj) {
     password: obj.password,
   }
 }
+
+
 module.exports = {
   model:model,
   toJSON,

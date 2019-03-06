@@ -1,22 +1,19 @@
 const usuarioModel = require('../models/estadisticas').model;
+const NombreRegistrado = require('../controllers/usuarioController');
 
-const findAll = () => {
+const findAll = (userId) => {
   return new Promise( (resolve, reject) => {
       const callback = (err, result) => {
       if (err) reject(err);
       resolve(result);
     };
-    usuarioModel.find({enabled: true}).exec(callback);
+   usuarioModel.countDocuments({'name': userId}).exec(callback);
+   
   });
+ //([ {$match: {"_id":409}}, {$unwind: "$Rentals"}, {$group: {"_id":"$_id", "total": {$sum: 1}}} ]);
 }
-
-const create = usuario => { //aqui ponerle el then y el cath
+const create = usuario => { 
   return new Promise( (resolve, reject) => {
-      /*
-      usuario
-      .then(() => {
-      })
-      */
     const newUsuario = new usuarioModel(usuario);
     newUsuario.save( err => {
       if (err) reject(err);
@@ -25,8 +22,8 @@ const create = usuario => { //aqui ponerle el then y el cath
   });
 }
 
-
 module.exports = {
   findAll,
   create,
+  
 }

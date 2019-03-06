@@ -156,13 +156,25 @@ const Token = require('../auth/Token');
 
   exports.irPrincipal = (req, res, next) => {
     userId = req.userId;
+    console.log("reqaaaaaaaaaaaaaaaaaa",req);
     res.render('principal', {
       pageTitle: 'Pagina Principal',
-      token: Token.buildToken(userId)
-//redencizamos para que se vaya
+      token: Token.buildToken(userId),
+      name : 'Noelia'
     });
   };
 
+  
+  exports.findAllB = (req, res, next) => {
+    userId = req.userId;
+    res.render('estadisticas', {
+      pageTitle: 'Pagina De Estadisticas',
+      token: Token.buildToken(userId)
+    });
+  };
+
+
+  
   /*
   exports.getModificarUsuario = (req, res, next) => {
     const usuarioId = req.params.id;
