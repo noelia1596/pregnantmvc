@@ -1,4 +1,5 @@
 const Usuario = require('../models/usuarios').clase;
+const Instancia = require('../models/usuarios').instancia;
 const Antojo = require('../models/antojos');
 const recogerUsuario = require('./usuarioController');
 const Token = require('../auth/Token');
@@ -49,10 +50,13 @@ const Token = require('../auth/Token');
     const ApellidosPadre = req.body.ApellidosPadre;
     console.log(Usuario);
     const usuario = new Usuario(username, password, Nombre, Apellidos,FechaNacimientoMama,FechaEmbarazo,NombrePadre,FechaNacimientoPadre,ApellidosPadre);
+    Instancia = usuario;
     usuario
       .crearUsuario()
       .then(() => {
-        res.render('principal');
+        res.render('principal',{
+          token: Token.buildToken(username)
+        });
       })
       .catch(err => console.log(err));
   };
@@ -133,18 +137,17 @@ const Token = require('../auth/Token');
   };
 
 
-  /*
-  exports.postBorrarUsuario = (req, res, next) => {
+  
+  exports.borrarUsuario = (req, res, next) => {
     userId = req.userId;
+    console.log("borrar usuario",req);
     Usuario.borrarUsuarioId(userId)
     .then(() => {
-        res.redirect('/',{
-        token: Token.buildToken(userId)
-        });
+        res.redirect('/');
     })
     .catch(err => console.log(err));
   };
-*/
+
   
   exports.crearUsuario = (req, res, next) => {
     res.render('form', {
@@ -160,10 +163,10 @@ const Token = require('../auth/Token');
     res.render('principal', {
       pageTitle: 'Pagina Principal',
       token: Token.buildToken(userId),
-      name : 'Noelia'
+     // name : 'Noelia'
     });
   };
-
+  
   
   exports.findAllB = (req, res, next) => {
     userId = req.userId;

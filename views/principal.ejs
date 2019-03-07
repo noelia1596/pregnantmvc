@@ -6,18 +6,37 @@
 <body>
   
 <style>
+  /*
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
     width: 100%;
     margin: auto;
 }
+*/
+
+body{
+  background-color: rgb(196, 204, 197);
+}
+.item {
+      display: block;
+      width: 100%;
+      height: 500px;
+}
+.item img {
+      height: 500%;
+      width: 100%;
+}
 </style>
   
 <div class="container">
-  <h2>Hola, <%- fullname %> </h2>
-  <div class="card-body">
-    <!--<h4>Bienvenido . {auth()->user()}</h4>-->
-  </div>
+
+  
+    <!--
+      <div class="card-body">
+      <h4>Bienvenido . {auth()->user()}</h4>
+    </div>
+    -->
+  
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -29,34 +48,19 @@
   
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="../images/6n.jpg" alt="6 semanas" width="460" height="345" class="img-responsive">
-        <div class="carousel-caption">
-          <p>6 SEMANAS</p>
-        </div>
+        <img src="../images/1.jpg" alt="6 semanas"  class="img-responsive">
       </div>
       <div class="item">
-        <img src="../images/8n.jpg" alt="8 semanas" width="460" height="345" class="img-responsive">
-        <div class="carousel-caption">
-          <p>8 SEMANAS</p>
-        </div>
+        <img src="../images/2.jpg" alt="8 semanas" class="img-responsive">
       </div>
       <div class="item">
-        <img src="../images/9n.jpg" alt="9 semanas" width="460" height="345" class="img-responsive">
-        <div class="carousel-caption">
-          <p>9 SEMANAS</p>
-        </div>
+        <img src="../images/3.jpg" alt="9 semanas" class="img-responsive">
       </div>
       <div class="item">
-        <img src="../images/18n.jpg" alt="18 semanas" width="460" height="345" class="img-responsive">
-        <div class="carousel-caption">
-          <p>18 SEMANAS</p>
-        </div>
+        <img src="../images/4.jpg" alt="18 semanas" class="img-responsive">
       </div>
       <div class="item">
-        <img src="../images/20n.jpg" alt="20 semanas" width="460" height="345" class="img-responsive">
-        <div class="carousel-caption">
-          <p>20 SEMANAS</p>
-        </div>
+        <img src="../images/5.jpg" alt="20 semanas" class="img-responsive">
       </div>
     </div>
     
@@ -71,9 +75,19 @@
   </div>
   </br>
   <div class="form-row">
-    <div><button class="btn btn-primary btnSeccion"  id="actualizar"><a href="/editarUsuario/<%=token%>">Actualizar Usuario</a></button></div>
-    <div><button class="btn btn-primary btnSeccion"  id="actualizar"><a href="/editarUsuario/<%=token%>">Borrar Usuario</a></button></div>
-  </div>
+      <div class="btn-toolbar" role="toolbar">
+          <button type="button" class="btn btn-default btn-s"><a href="/editarUsuario/<%=token%>">Actualizar Usuario</a>
+            <span class="glyphicon glyphicon-star"></span>
+          </button>
+      </div>  
+       
+    </br>
+
+      <div class="btn-toolbar" role="toolbar">
+          <button type="button" class="btn btn-default btn-s"><a href="/borrarUsuario/<%=token%>">Borrar Usuario</a>
+            <span class="glyphicon glyphicon-star"></span>
+          </button>
+      </div>  
 </div>
     
 

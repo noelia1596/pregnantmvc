@@ -35,12 +35,11 @@ const clase = class Usuario{
         ) 
     }
 
-    /*
+    
     static borrarUsuarioId(id){
-        userId = req.userId;
-        return db.execute('DELETE FROM pregnant.usuarios WHERE usuario = ?', [userId]);
+        return db.execute('DELETE FROM pregnant.usuarios WHERE usuario = ?', [id]);
     }
-
+/*
     static selectById(id) {
         return db.execute('SELECT * FROM pregnant.usuarios WHERE usuario= ?', [userId]);
       }

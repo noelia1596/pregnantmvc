@@ -45,7 +45,7 @@ router.get('/irPrincipal', indexController.irPrincipal);
 
 router.get('/verEstadisticas/:token/',Token.verifyParam, usuarioControl.findAll);
 
-
+router.get('/borrarUsuario/:token/',Token.verifyParam, indexController.borrarUsuario);
 
 
 

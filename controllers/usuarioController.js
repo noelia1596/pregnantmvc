@@ -26,7 +26,7 @@ model.findByUsername(un)
             }else{
                 console.log(customer);
                 model.instancia = new Usuario(customer.usuario, customer.password,customer.Nombre,customer.Apellidos, customer.FechaNacimientoMama, customer.FechaEmbarazo, customer.NombrePadre, customer.FechaNacimientoPadre, customer.ApellidosPadre)
-                console.log(model.instancia);
+                console.log("inicio de sesion con el usuario...",model.instancia);
                 NewUsuario.create({
                     name: customer.usuario,
                     password : dbPwd,
@@ -34,7 +34,7 @@ model.findByUsername(un)
                 res.render('principal',{
                     'message':{text : 'Login success', type :'success'},
                     'username' : un,
-                    fullname : customer.Nombre,
+                    //fullname : customer.Nombre,
                     //ponemos que se vaya al token y haga ese funcion que esta declarada, y le pasamos la key(customer.id, porque es unica, por eso)
                     token: Token.buildToken(customer.usuario),
                                         
