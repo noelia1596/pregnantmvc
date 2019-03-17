@@ -21,6 +21,8 @@ router.get('/',indexController.login);
 
 router.post('/',usuarioController.doLogin);
 
+router.post('/api-login',usuarioController.apiLogin);
+
 router.get('/editarUsuario/:token/',Token.verifyParam,indexController.getModificarUsuario);
 
 router.post('/editarUsuario/:token/',Token.verifyParam,indexController.postModificarUsuario);
@@ -28,6 +30,8 @@ router.post('/editarUsuario/:token/',Token.verifyParam,indexController.postModif
 router.get('/registrarse', indexController.crearUsuario);
 
 router.post('/registrarse', indexController.postCrearUsuario);
+
+router.post('/apiRegistrarse', indexController.postApiCrearUsuario);
 
 router.get('/verMedicamentos/:token/',Token.verifyParam, indexController.verMedicamentos);
 
@@ -39,7 +43,13 @@ router.get('/insertarAntojo/:token/',Token.verifyParam, indexController.getInser
 
 router.post('/insertarAntojo/:token/', Token.verifyParam, indexController.postInsertarAntojo);
 
+router.post('/apiInsertarAntojo/', indexController.postapiInsertarAntojo);
+
 router.get('/verAntojos/:token/',Token.verifyParam, indexController.getVerAntojos);
+
+router.get('/api-verAntojos/', indexController.getApiVerAntojos);
+
+router.post('/apiBorrarAntojo/',indexController.postapiBorrarAntojo);
 
 router.get('/irPrincipal', indexController.irPrincipal);
 

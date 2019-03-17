@@ -60,6 +60,30 @@ const Token = require('../auth/Token');
       })
       .catch(err => console.log(err));
   };
+
+  exports.postApiCrearUsuario = (req, res, next) => {
+    const username = req.body.usuario;
+    const password = req.body.password;
+    const Nombre = req.body.Nombre;
+    const Apellidos = req.body.Apellidos;
+    const FechaNacimientoMama = req.body.FechaNacimientoMama;
+    const FechaEmbarazo = req.body.FechaEmbarazo;
+    const NombrePadre = req.body.NombrePadre;
+    const FechaNacimientoPadre = req.body.FechaNacimientoPadre;
+    const ApellidosPadre = req.body.ApellidosPadre;
+    console.log(Usuario);
+    const usuario = new Usuario(username, password, Nombre, Apellidos,FechaNacimientoMama,FechaEmbarazo,NombrePadre,FechaNacimientoPadre,ApellidosPadre);
+    //Instancia = usuario;
+    usuario
+      .crearUsuario()
+      .then(() => {
+        res.send(
+          usuario
+        );
+      })
+      .catch(err => console.log(err));
+  };
+
   exports.postInsertarAntojo = (req, res, next) => {
     const nombreDelAntojo = req.body.NombreAntojo;
     const tipoDeAntojo = req.body.TipoDeAntojo;
@@ -74,6 +98,42 @@ const Token = require('../auth/Token');
         res.render('principal',{
           token: Token.buildToken(userId)
         });
+        
+      })
+      .catch(err => console.log(err));
+  };
+
+
+  exports.postapiInsertarAntojo = (req, res, next) => {
+    const usuario = req.body.usuario;
+    const nombreDelAntojo = req.body.NombreAntojo;
+    const tipoDeAntojo = req.body.TipoDeAntojo;
+    const fechaDelAntojo = req.body.FechaAntojo;
+    const vecesDadasAntojo = req.body.VecesAntojo;
+    const aQuienDio = req.body.aQuienDio;
+    const antojo = new Antojo(usuario,tipoDeAntojo, nombreDelAntojo, fechaDelAntojo, vecesDadasAntojo, aQuienDio);
+    console.log(antojo);
+    antojo
+      .crearAntojo()
+      .then((result) => {
+        res.send(
+          result
+        );
+        
+      })
+      .catch(err => console.log(err));
+  };
+
+
+  exports.postapiBorrarAntojo = (req, res, next) => {
+    const id = req.body.id;
+    console.log("postapiBorrarAntojo",id);
+    Antojo
+      .BorrarAntojo(id)
+      .then(() => {
+        res.send(
+          200
+        );
         
       })
       .catch(err => console.log(err));
@@ -99,6 +159,21 @@ const Token = require('../auth/Token');
         token: Token.buildToken(userId), //al usuario le pasamos el token
         antojos:antojos
       })
+      
+    })
+    .catch(err => console.log(err));
+    
+  };
+
+  exports.getApiVerAntojos = (req, res, next) => {
+    userId = req.body.username;//coge el usuario que se ha insertado
+    Antojo.ImprimirAntojo(userId)
+    .then((rows) => {
+      let antojos = rows[0];
+      console.log("rowsssssssssss",antojos);
+      res.send(
+        antojos
+      )
       
     })
     .catch(err => console.log(err));

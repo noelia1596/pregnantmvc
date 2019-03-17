@@ -5,9 +5,10 @@ const usuarioM = require('../models/usuarios');
 
 
 module.exports = class Antojo{
-    constructor(tipoDeAntojo, nombreDelAntojo, fechaDelAntojo, vecesDadasDelAntojo, aQuienLeDio){
-        const usuariooo = usuarioM.instancia;
-        this.usuario = usuariooo.username;
+    constructor(usuario, tipoDeAntojo, nombreDelAntojo, fechaDelAntojo, vecesDadasDelAntojo, aQuienLeDio){
+        this.usuario = usuario;
+        //const usuariooo = usuarioM.instancia; y arriba usuario tampoco estaba antes
+        //this.usuario = usuariooo.username;
         this.tipoDeAntojo = tipoDeAntojo;
         this.nombreDelAntojo = nombreDelAntojo;
         this.fechaDelAntojo = fechaDelAntojo;
@@ -38,7 +39,7 @@ module.exports = class Antojo{
       }
 
     static BorrarAntojo(id){
-        return db.execute('DELETE FROM pregnant.antojos WHERE usuario = ?', [id]);
+        return db.execute('DELETE FROM pregnant.antojos WHERE id = ?', [id]);
     }
 
     static dateToString(date){
